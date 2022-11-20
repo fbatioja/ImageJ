@@ -964,6 +964,14 @@ public class Roi extends Object implements Cloneable, java.io.Serializable, Iter
 				x=ox;
 				break;
 		}
+		if (center) {
+			bounds = null;
+		}
+		processMoveHandle(asp, x2, y2, xc, yc);
+		subPixel = false;
+	}
+
+	protected void processMoveHandle(double asp, int x2, int y2, int xc, int yc) {
 		if (x<x2)
 		   width=x2-x;
 		else
@@ -1018,7 +1026,7 @@ public class Roi extends Object implements Cloneable, java.io.Serializable, Iter
 				height=1;
 				y=y2=yc;
 			}
-			bounds = null;
+			
 		}
 
 		if (constrain) {
@@ -1118,7 +1126,6 @@ public class Roi extends Object implements Cloneable, java.io.Serializable, Iter
 		oldX=x; oldY=y;
 		oldWidth=width; oldHeight=height;
 		bounds = null;
-		subPixel = false;
 	}
 
 	void move(int sx, int sy) {
