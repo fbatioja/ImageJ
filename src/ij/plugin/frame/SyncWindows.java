@@ -335,40 +335,7 @@ public class SyncWindows extends PlugInFrame implements
 	// --------------------------------------------------
 	/** Propagate mouse clicked events to all synchronized windows. */
 	public void mouseClicked(MouseEvent e) {
-		if (!cCursor.getState()) return;
-		if (vwins == null) return;
-		// prevent popups popping up in all windows on right mouseclick
-		if (Toolbar.getToolId()!= Toolbar.MAGNIFIER &&
-			(e.isPopupTrigger() || (e.getModifiers() & MouseEvent.META_MASK)!=0)) return;
-		ImagePlus imp;
-		ImageWindow iw;
-		ImageCanvas ic;
-		Point p;
-		p = new Point(x,y);
-
-		// get ImageCanvas that received event
-		ImageCanvas icc = (ImageCanvas) e.getSource();
-		ImageWindow iwc = (ImageWindow) icc.getParent();
-
-		for(int n=0; n<vwins.size();++n) {
-			// to keep ImageJ from freezing when a mouse event is processed on exit
-			if (ijInstance.quitting()) {
-				return;
-			}
-			imp = getImageFromVector(n);
-			if (imp != null) {
-				iw = imp.getWindow();
-				if(iw != iwc) {
-					ic = iw.getCanvas();
-					if (cCoords.getState()) {
-						p = getMatchingCoords(ic, icc, x, y);
-					}
-					ic.mouseClicked(adaptEvent(e, ic, p));
-				}
-			}
-		}
-		// Store srcRect, Magnification and others of current ImageCanvas
-		storeCanvasState(icc);
+		mouseAccion(e, false);
 	}
 
 	// --------------------------------------------------
@@ -454,6 +421,10 @@ public class SyncWindows extends PlugInFrame implements
 	// --------------------------------------------------
 	/** Propagate mouse pressed events to all synchronized windows. */
 	public void mousePressed(MouseEvent e) {
+		mouseAccion(e, true);
+	}
+
+	private void mouseAccion(MouseEvent e, boolean mousePressed) {
 		if (!cCursor.getState()) return;
 		if (vwins == null) return;
 		// prevent popups popping up in all windows on right mouseclick
@@ -478,15 +449,21 @@ public class SyncWindows extends PlugInFrame implements
 			imp = getImageFromVector(n);
 			if (imp != null) {
 				iw = imp.getWindow();
-				ic = iw.getCanvas();
-				// Repaint to get rid of sync indicator.
-				ic.paint(ic.getGraphics());
+				if (mousePressed) {
+					ic = iw.getCanvas();
+					// Repaint to get rid of sync indicator.
+					ic.paint(ic.getGraphics());
+				}
 				if(iw != iwc) {
 					ic = iw.getCanvas();
 					if (cCoords.getState()) {
 						p = getMatchingCoords(ic, icc, x, y);
 					}
-					ic.mousePressed(adaptEvent(e, ic, p));
+					if (mousePressed) {
+						ic.mousePressed(adaptEvent(e, ic, p));
+					} else {
+						ic.mouseClicked(adaptEvent(e, ic, p));
+					}
 				}
 			}
 		}
