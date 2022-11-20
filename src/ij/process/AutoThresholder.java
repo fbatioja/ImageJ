@@ -6,6 +6,15 @@ import java.util.Arrays;
     (http://fiji.sc/Auto_Threshold) by G.Landini at bham dot ac dot uk). */
 public class AutoThresholder {
 	private static String[] mStrings;
+	private int first_bin;
+	private int last_bin;
+	double tot_ent;  /* total entropy */
+	double max_ent;  /* max entropy */
+	double ent_back; /* entropy of the background pixels at a given threshold */
+	double ent_obj;  /* entropy of the object pixels at a given threshold */
+	double [] norm_histo = new double[256]; /* normalized histogram */
+	double [] P1 = new double[256]; /* cumulative normalized histogram */
+	double [] P2 = new double[256]; 
 			
 	public enum Method {
 		Default, 
@@ -86,8 +95,6 @@ public class AutoThresholder {
 		// Ported to ImageJ plugin by G. Landini from E Celebi's fourier_0.8 routines
 		int threshold=-1;
 		int ih, it;
-		int first_bin;
-		int last_bin;
 		double sum_pix;
 		double num_pix;
 		double term;
@@ -454,15 +461,7 @@ public class AutoThresholder {
 		// Ported to ImageJ plugin by G.Landini from E Celebi's fourier_0.8 routines
 		int threshold=-1;
 		int ih, it;
-		int first_bin;
-		int last_bin;
-		double tot_ent;  /* total entropy */
-		double max_ent;  /* max entropy */
-		double ent_back; /* entropy of the background pixels at a given threshold */
-		double ent_obj;  /* entropy of the object pixels at a given threshold */
-		double [] norm_histo = new double[256]; /* normalized histogram */
-		double [] P1 = new double[256]; /* cumulative normalized histogram */
-		double [] P2 = new double[256]; 
+		
 
 		double total =0;
 		for (ih = 0; ih < 256; ih++ ) 
@@ -813,22 +812,13 @@ public class AutoThresholder {
 		int opt_threshold;
 
 		int ih, it;
-		int first_bin;
-		int last_bin;
 		int tmp_var;
 		int t_star1, t_star2, t_star3;
 		int beta1, beta2, beta3;
 		double alpha;/* alpha parameter of the method */
 		double term;
-		double tot_ent;  /* total entropy */
-		double max_ent;  /* max entropy */
-		double ent_back; /* entropy of the background pixels at a given threshold */
-		double ent_obj;  /* entropy of the object pixels at a given threshold */
 		double omega;
-		double [] norm_histo = new double[256]; /* normalized histogram */
-		double [] P1 = new double[256]; /* cumulative normalized histogram */
-		double [] P2 = new double[256]; 
-
+		
 		double total =0;
 		for (ih = 0; ih < 256; ih++ ) 
 			total+=data[ih];
@@ -1008,16 +998,7 @@ public class AutoThresholder {
 		// Ported to ImageJ plugin by G.Landini from E Celebi's fourier_0.8 routines
 		int threshold;
 		int ih, it;
-		int first_bin;
-		int last_bin;
-		double term;
-		double tot_ent;  /* total entropy */
-		double min_ent;  /* max entropy */
-		double ent_back; /* entropy of the background pixels at a given threshold */
-		double ent_obj;  /* entropy of the object pixels at a given threshold */
-		double [] norm_histo = new double[256]; /* normalized histogram */
-		double [] P1 = new double[256]; /* cumulative normalized histogram */
-		double [] P2 = new double[256]; 
+		double term;		
 
 		double total =0;
 		for (ih = 0; ih < 256; ih++ ) 
@@ -1054,7 +1035,7 @@ public class AutoThresholder {
 		// Calculate the total entropy each gray-level
 		// and find the threshold that maximizes it 
 		threshold =-1;
-		min_ent = Double.MAX_VALUE;
+		max_ent = Double.MAX_VALUE;
 
 		for ( it = first_bin; it <= last_bin; it++ ) {
 			/* Entropy of the background pixels */
@@ -1076,8 +1057,8 @@ public class AutoThresholder {
 			/* Total entropy */
 			tot_ent = Math.abs ( ent_back - ent_obj );
 
-			if ( tot_ent < min_ent ) {
-				min_ent = tot_ent;
+			if ( tot_ent < max_ent ) {
+				max_ent = tot_ent;
 				threshold = it;
 			}
 		}
