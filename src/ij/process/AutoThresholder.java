@@ -461,7 +461,8 @@ public class AutoThresholder {
 		// Ported to ImageJ plugin by G.Landini from E Celebi's fourier_0.8 routines
 		int threshold=-1;
 		int ih, it;
-		
+		P1 = new double[256]; /* cumulative normalized histogram */ 
+		P2 = new double[256]; 
 
 		double total =0;
 		for (ih = 0; ih < 256; ih++ ) 
@@ -818,6 +819,8 @@ public class AutoThresholder {
 		double alpha;/* alpha parameter of the method */
 		double term;
 		double omega;
+		P1 = new double[256]; /* cumulative normalized histogram */ 
+		P2 = new double[256]; 
 		
 		double total =0;
 		for (ih = 0; ih < 256; ih++ ) 
@@ -998,7 +1001,9 @@ public class AutoThresholder {
 		// Ported to ImageJ plugin by G.Landini from E Celebi's fourier_0.8 routines
 		int threshold;
 		int ih, it;
-		double term;		
+		double term;	
+		P1 = new double[256]; /* cumulative normalized histogram */ 
+		P2 = new double[256]; 	
 
 		double total =0;
 		for (ih = 0; ih < 256; ih++ ) 
