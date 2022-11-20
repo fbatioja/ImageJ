@@ -562,30 +562,36 @@ public class Projector implements PlugIn {
 							}
 						} // if znew<zBuffer[offset]
 					} //if OpacityOrNearestP
-						if (MeanVal) {
-							//sp = (long *)sumbufaddr;
-							sumBuffer[offset] += thispixel;
-							//cp = (short int *)countbufaddr;
-							countBuffer[offset]++;
-						} else
-							if (BrightestPt) {
-								if (DepthCueIntLessThan100) {
-									if ((thispixel>(brightCueArray[offset]&0xff)) || (thispixel==(brightCueArray[offset]&0xff)) && (znew>cueZBuffer[offset])) {
-										brightCueArray[offset] = (byte)thispixel;  //use z-buffer to ensure that if depth-cueing is on,
-										cueZBuffer[offset] = (short)znew;       //the closer of two equally-bright points is displayed.
-										projArray[offset] = (byte)((depthCueInt*thispixel/100 +
-											c100minusDepthCueInt*thispixel*(zmax-znew)/zmaxminuszmintimes100));
-									}
-							} else {
-								if (thispixel>(projArray[offset]&0xff))
-									projArray[offset] = (byte)thispixel;
-							}
-						} // else BrightestPt
+						meanVal(thispixel, offset, znew, zmax, zmaxminuszmintimes100, c100minusDepthCueInt,
+								DepthCueIntLessThan100, MeanVal, BrightestPt);
 					} // if thispixel in range
 				} //for i (all pixels in row)
 			} // for j (all rows of BoundRect)
 		} // for k (all slices)
 	} //  doOneProjectionX()
+
+	private void meanVal(int thispixel, int offset, int znew, int zmax, int zmaxminuszmintimes100,
+			int c100minusDepthCueInt, boolean DepthCueIntLessThan100, boolean MeanVal, boolean BrightestPt) {
+		if (MeanVal) {
+			//sp = (long *)sumbufaddr;
+			sumBuffer[offset] += thispixel;
+			//cp = (short int *)countbufaddr;
+			countBuffer[offset]++;
+		} else
+			if (BrightestPt) {
+				if (DepthCueIntLessThan100) {
+					if ((thispixel>(brightCueArray[offset]&0xff)) || (thispixel==(brightCueArray[offset]&0xff)) && (znew>cueZBuffer[offset])) {
+						brightCueArray[offset] = (byte)thispixel;  //use z-buffer to ensure that if depth-cueing is on,
+						cueZBuffer[offset] = (short)znew;       //the closer of two equally-bright points is displayed.
+						projArray[offset] = (byte)((depthCueInt*thispixel/100 +
+							c100minusDepthCueInt*thispixel*(zmax-znew)/zmaxminuszmintimes100));
+					}
+			} else {
+				if (thispixel>(projArray[offset]&0xff))
+					projArray[offset] = (byte)thispixel;
+			}
+		} // else BrightestPt
+	}
 	
 
 	/** Projects each pixel of a volume (stack of slices) onto a plane as the volume rotates about the y-axis. */
@@ -659,22 +665,8 @@ public class Projector implements PlugIn {
 								}
 							} // if (znew < zBuffer[offset])
 						} // if (OpacityOrNearestPt)
-						if (MeanVal) {
-							sumBuffer[offset] += thispixel;
-							countBuffer[offset]++;
-						} else if (BrightestPt) {
-							if (DepthCueIntLessThan100) {
-								if ((thispixel>(brightCueArray[offset]&0xff)) || (thispixel==(brightCueArray[offset]&0xff)) && (znew>cueZBuffer[offset])) {
-									brightCueArray[offset] = (byte)thispixel;  //use z-buffer to ensure that if depth-cueing is on,
-									cueZBuffer[offset] = (short)znew;       //the closer of two equally-bright points is displayed.
-									projArray[offset] = (byte)((depthCueInt*thispixel/100 +
-										c100minusDepthCueInt*thispixel*(zmax-znew)/zmaxminuszmintimes100));
-								}
-							} else {
-								if (thispixel > (projArray[offset]&0xff))
-									projArray[offset] = (byte)thispixel;
-							}
-						} // if  BrightestPt
+						meanVal(thispixel, offset, znew, zmax, zmaxminuszmintimes100, c100minusDepthCueInt,
+								DepthCueIntLessThan100, MeanVal, BrightestPt);
 					} //end if thispixel in range
 				} // for i (all pixels in row)
 			} // for j (all rows)
