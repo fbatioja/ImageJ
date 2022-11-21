@@ -181,7 +181,11 @@ public class VirtualStack extends ImageStack {
 		IJ.redirectErrorMessages(false);
 		ImageProcessor ip = null;
 		int depthThisImage = 0;
-		if (imp!=null) {			
+		if (imp!=null) {
+			int w = imp.getWidth();
+			int h = imp.getHeight();
+			int type = imp.getType();
+			ColorModel cm = imp.getProcessor().getColorModel();
 			String info = (String)imp.getProperty("Info");
 			if (info!=null) {
 				if (FolderOpener.useInfo(info))
