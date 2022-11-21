@@ -181,11 +181,7 @@ public class VirtualStack extends ImageStack {
 		IJ.redirectErrorMessages(false);
 		ImageProcessor ip = null;
 		int depthThisImage = 0;
-		if (imp!=null) {
-			int w = imp.getWidth();
-			int h = imp.getHeight();
-			int type = imp.getType();
-			ColorModel cm = imp.getProcessor().getColorModel();
+		if (imp!=null) {			
 			String info = (String)imp.getProperty("Info");
 			if (info!=null) {
 				if (FolderOpener.useInfo(info))
@@ -208,12 +204,7 @@ public class VirtualStack extends ImageStack {
 			depthThisImage = 8;
 		}
 		if (depthThisImage!=bitDepth) {
-			switch (bitDepth) {
-				case 8: ip=ip.convertToByte(true); break;
-				case 16: ip=ip.convertToShort(true); break;
-				case 24:  ip=ip.convertToRGB(); break;
-				case 32: ip=ip.convertToFloat(); break;
-			}
+			ip = getIp(ip);
 		}
 		if (ip.getWidth()!=getWidth() || ip.getHeight()!=getHeight()) {
 			ImageProcessor ip2 = ip.createProcessor(getWidth(), getHeight());
@@ -224,6 +215,16 @@ public class VirtualStack extends ImageStack {
 			ip.setCalibrationTable(cTable);
 		return ip;
 	 }
+
+	private ImageProcessor getIp(ImageProcessor ip) {
+		switch (bitDepth) {
+			case 8: ip=ip.convertToByte(true); break;
+			case 16: ip=ip.convertToShort(true); break;
+			case 24:  ip=ip.convertToRGB(); break;
+			case 32: ip=ip.convertToFloat(); break;
+		}
+		return ip;
+	}
 	 	 
 	 private void label(ImageProcessor ip, String msg, Color color) {
 		int size = getHeight()/20;

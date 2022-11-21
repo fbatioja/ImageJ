@@ -84,8 +84,7 @@ public class HyperStackReducer implements PlugIn, DialogListener {
 		int c1 = imp.getChannel();
 		int z1 = imp.getSlice();
 		int t1 = imp.getFrame();
-		int i = 1;
-		int n = channels*slices*frames;
+		
 		ImageStack stack = imp.getStack();
 		ImageStack stack2 = imp2.getStack();
 		for (int c=1; c<=channels; c++) {

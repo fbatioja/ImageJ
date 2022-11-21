@@ -293,7 +293,6 @@ class ThumbnailsCanvas extends Canvas implements MouseListener, MouseMotionListe
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		cImp.setPosition(currentChannel, currentSlice, currentFrame);
-		CompositeImage cImp = (CompositeImage) this.cImp;
 		IJ.run(cmd);
 		repaint();
 		setCursor(defaultCursor);

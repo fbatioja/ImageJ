@@ -79,7 +79,6 @@ public class RotatedRectRoi extends PolygonRoi {
 	}
 		
 	void makeRectangle(double x1, double y1, double x2, double y2) {
-		double length = Math.sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));
 		double angle = Math.atan ((x2-x1)/(y2-y1));
 		double wsa = (rectWidth/2.0)*Math.sin((Math.PI/2.0)+angle);
 		double wca = (rectWidth/2.0)*Math.cos((Math.PI/2)+angle);

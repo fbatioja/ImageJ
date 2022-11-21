@@ -276,7 +276,7 @@ public class FHT extends FloatProcessor {
 	 *  Note that all amplitudes in the output 'x' are multiplied by maxN.
 	 */
 	public void dfht3(float[] x, int base, boolean inverse, int maxN) {
-		int i, stage, gpNum, gpIndex, gpSize, numGps, Nlog2;
+		int i, stage, gpNum, gpSize, numGps, Nlog2;
 		int bfNum, numBfs;
 		int Ad0, Ad1, Ad2, Ad3, Ad4, CSAd;
 		float rt1, rt2, rt3, rt4;
@@ -578,7 +578,7 @@ public class FHT extends FloatProcessor {
 	}
 
 	FHT multiply(FHT fht, boolean  conjugate) {
-		int rowMod, cMod, colMod;
+		int rowMod, colMod;
 		double h2e, h2o;
 		float[] h1 = (float[])getPixels();
 		float[] h2 = (float[])fht.getPixels();
@@ -605,7 +605,7 @@ public class FHT extends FloatProcessor {
 		the frequency domain. Division in the frequency domain is equivalent 
 		to deconvolution in the space domain. */
 	public FHT divide(FHT fht) {
-		int rowMod, cMod, colMod;
+		int rowMod, colMod;
 		double mag, h2e, h2o;
 		float[] h1 = (float[])getPixels();
 		float[] h2 = (float[])fht.getPixels();

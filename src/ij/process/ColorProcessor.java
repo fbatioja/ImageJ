@@ -557,8 +557,7 @@ public class ColorProcessor extends ImageProcessor {
 	*  @param bp  The ByteProcessor where the image data are read from.
 	*/
 	public void setChannel(int channel, ByteProcessor bp) {
-		byte[] bPixels = (byte[])bp.getPixels();
-		int value;
+		byte[] bPixels = (byte[])bp.getPixels();		
 		int size = width*height;
 		int shift = 16 - 8*(channel-1);
 		if (channel==4) shift=24;
@@ -568,8 +567,7 @@ public class ColorProcessor extends ImageProcessor {
 	}
 
 	/** Sets the current pixels from 3 byte arrays (reg, green, blue). */
-	public void setRGB(byte[] R, byte[] G, byte[] B) {
-		int c, r, g, b;
+	public void setRGB(byte[] R, byte[] G, byte[] B) {		
 		for (int i=0; i < width*height; i++)
 			pixels[i] = 0xff000000 | ((R[i]&0xff)<<16) | ((G[i]&0xff)<<8) | B[i]&0xff;
 	}

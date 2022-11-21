@@ -121,8 +121,7 @@ public class EllipseFitter {
 	void getEllipseParam() {
 		double    sqrtPi = 1.772453851;
 		double    a11, a12, a22, m4, z, scale, tmp, xoffset, yoffset;
-		double    RealAngle;
-
+		
 		if (mask==null) {
 			major = (width*2) / sqrtPi;
 			minor = (height*2) / sqrtPi; // * Info->PixelAspectRatio;
@@ -270,12 +269,12 @@ public class EllipseFitter {
 		int xc = (int)Math.round(xCenter);
 		int yc = (int)Math.round(yCenter);
 		int maxY = ip.getHeight();
-		int xmin, xmax;
+		
 		double sint, cost, rmajor2, rminor2, g11, g12, g22, k1, k2, k3;
-		int x, xsave, ymin, ymax;
+		int x, ymin, ymax;
 		int[] txmin = new int[maxY];
 		int[] txmax = new int[maxY];
-		double j1, j2, yr;
+		double j1, j2;
 
 		sint = Math.sin(theta);
 		cost = Math.cos(theta);

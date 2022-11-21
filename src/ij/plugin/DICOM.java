@@ -520,7 +520,6 @@ class DicomDecoder {
 	}
   
 	FileInfo getFileInfo() throws IOException {
-		long skipCount;
 		FileInfo fi = new FileInfo();
 		int bitsAllocated = 16;
 		fi.fileFormat = fi.RAW;

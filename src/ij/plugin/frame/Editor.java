@@ -1608,7 +1608,6 @@ public class Editor extends PlugInFrame implements ActionListener, ItemListener,
 	}
     
     void changeFontSize(boolean larger) {
-        int in = fontSizeIndex;
         if (larger) {
             fontSizeIndex++;
             if (fontSizeIndex==sizes.length)

@@ -250,7 +250,7 @@ public class Calibrator implements PlugInFilter, Measurements, ActionListener {
 				);
 			return null;
 		}
-		int n = x.length;
+		
 		double xmin=0.0,xmax;
 		if (imp.getType()==ImagePlus.GRAY16)
 			xmax=65535.0; 

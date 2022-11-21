@@ -31,8 +31,7 @@ public class FloatBlitter implements Blitter {
 	/** Copies the float image in 'ip' to (x,y) using the specified mode. */
 	public void copyBits(ImageProcessor ip, int xloc, int yloc, int mode) {
 		Rectangle r1, r2;
-		int srcIndex, dstIndex;
-		int xSrcBase, ySrcBase;
+		int srcIndex, dstIndex;		
 		float[] srcPixels;
 		
 		if (!(ip instanceof FloatProcessor))
@@ -46,8 +45,6 @@ public class FloatBlitter implements Blitter {
 			return;
 		srcPixels = (float [])ip.getPixels();
 		r1 = r1.intersection(r2);
-		xSrcBase = (xloc<0)?-xloc:0;
-		ySrcBase = (yloc<0)?-yloc:0;
 		boolean useDBZValue = !Float.isInfinite(divideByZeroValue);
 		float src, dst;
 		for (int y=r1.y; y<(r1.y+r1.height); y++) {

@@ -85,7 +85,6 @@ public class BrowserLauncher implements PlugIn {
 	 * @throws IOException If the web browser could not be located or does not run
 	 */
 	public static void openURL(String url) throws IOException {
-		String errorMessage = "";
 		if (IJ.isMacOSX())
 			IJ.runMacro("exec('open', getArgument())",url);
 		else if (IJ.isWindows()) {

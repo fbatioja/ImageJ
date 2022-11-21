@@ -491,7 +491,7 @@ public class AVI_Writer implements PlugInFilter {
         byte[] pixels = (byte[])ip.getPixels();
         int width = ip.getWidth();
         int height = ip.getHeight();
-        int c, offset, index = 0;
+        int offset, index = 0;
         for (int y=height-1; y>=0; y--) {
             offset = y*width;
             for (int x=0; x<width; x++)

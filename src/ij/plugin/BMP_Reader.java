@@ -257,7 +257,6 @@ class BMPDecoder {
                         int b0 = (((int)(rawData[k++])) & mask);
                         int b1 = (((int)(rawData[k++])) & mask) << 8;
                         int b2 = (((int)(rawData[k++])) & mask) << 16;
-                        int b3 = (((int)(rawData[k++])) & mask) << 24; // this gets ignored!
                         intData[j] = 0xff000000 | b0 | b1 | b2;
                         j++;
                 }

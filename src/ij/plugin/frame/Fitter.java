@@ -212,7 +212,7 @@ public class Fitter extends PlugInFrame implements PlugIn, ItemListener, ActionL
 		textArea.selectAll();
 		textArea.setText("");
 		try {
-			BufferedReader r = new BufferedReader(new FileReader(directory+name));
+			BufferedReader r = new BufferedReader(new FileReader(path));
 			while (true) {
 				String s=r.readLine();
 				if (s==null ||(s.length()>100))

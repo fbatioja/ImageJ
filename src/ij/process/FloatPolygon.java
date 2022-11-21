@@ -171,7 +171,7 @@ public class FloatPolygon {
 			}
 		}
 		int pstart = p1;          // the start point is always on the convex hull
-		int count = 0;
+		
 		do {
 			double x1 = xpoints[p1];
 			double y1 = ypoints[p1];

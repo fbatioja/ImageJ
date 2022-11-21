@@ -102,7 +102,6 @@ public class CommandFinder implements PlugIn, ActionListener, WindowListener, Ke
 	protected void populateList(String matchingSubstring) {
 		String substring = matchingSubstring.toLowerCase();
 		ArrayList list = new ArrayList();
-		int count = 0;
 		for (int i = 0; i < commands.length; ++i) {
 			String commandName = commands[i];
 			String command = commandName.toLowerCase();

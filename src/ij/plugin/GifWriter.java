@@ -338,12 +338,7 @@ class AnimatedGifEncoder2 {
 String name;
 
 public boolean setoptions() {
-	String[] GCTtype = {"Do not use","Load from Current Image", "Load from another Image RGB or 8 Bit",
-	 "Use another RGB to create a new color table " };
-	String[] DisposalType = { "No Disposal","Do not Dispose", "Restore to Background", "Restore to previous" };
-	String[] TransparencyType ={"No Transparency", "Automatically Set if Available (8 bit only)", "Set to Index",
-				"Set to index with specified color", "Set to the index that is closest to specified color"};
-		int setdelay=delay*10;
+	
 	int gctType=0;
 	int setTrans;
 	if (GCTloadedExternal) gctType = 2;

@@ -39,7 +39,7 @@ public class LUT_Editor implements PlugIn, ActionListener{
     	}
 		boolean recording = Recorder.record;
 		Recorder.record = false;
-        int red=0, green=0, blue=0;
+        
         GenericDialog gd = new GenericDialog("LUT Editor");
         Panel buttonPanel = new Panel(new GridLayout(4, 1, 0, 5));
         openButton = new Button("Open...");

@@ -308,8 +308,7 @@ public class AutoThresholder {
 		int n = data.length;
 		int[] data2 = new int[n];
 		int mode=0, maxCount=0;
-		for (int i=0; i<n; i++) {
-			int count = data[i];
+		for (int i=0; i<n; i++) {			
 			data2[i] = data[i];
 			if (data2[i]>maxCount) {
 				maxCount = data2[i];
@@ -771,7 +770,6 @@ public class AutoThresholder {
 		// See http://www.cs.tut.fi/~ant/histthresh/ for an excellent slide presentation
 		// and the original Matlab code.
 
-		int iter =0;
 		int threshold = -1;
 		double ptile= 0.5; // default fraction of foreground pixels
 		double [] avec = new double [256];

@@ -345,7 +345,6 @@ public class CalibrationBar implements PlugIn {
 		fontHeight = metrics.getHeight();
 
 		for (int i = 0; i < numLabels; i++) {
-			double yLabelD = (int)(YMARGIN*zoom + BAR_LENGTH*zoom - i*barStep - 1);
 			int yLabel = (int)(Math.round( y + BAR_LENGTH*zoom - i*barStep - 1));
 			Calibration cal = imp.getCalibration();
 			String s = "";

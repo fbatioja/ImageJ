@@ -246,7 +246,6 @@ public class Orthogonal_Views implements PlugIn, MouseListener, MouseMotionListe
 		if (fp1==null) return;
 		updateXZView(p,is);
 		
-		double arat=az/ax;
 		int width2 = fp1.getWidth();
 		int height2 = (int)Math.round(fp1.getHeight()*az);
 		if (height2<1) height2=1;

@@ -206,7 +206,7 @@ public class BinaryProcessor extends ByteProcessor {
 		int v, index, code;
         int offset, rowOffset = width;
         int pixelsRemoved = 0;
-        int count = 100;
+        
 		for (int y=yMin; y<=yMax; y++) {
 			offset = xMin + y * width;
 			for (int x=xMin; x<=xMax; x++) {

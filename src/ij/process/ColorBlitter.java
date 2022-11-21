@@ -42,7 +42,7 @@ public class ColorBlitter implements Blitter {
 				cm = ip.getDefaultColorModel();
 			int size = ip.getWidth()*ip.getHeight();
 			srcPixels = new int[size];
-			int v;
+			
 			for (int i=0; i<size; i++)
 				srcPixels[i] = cm.getRGB(pixels8[i]&255);
 		} else

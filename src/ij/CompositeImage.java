@@ -201,7 +201,6 @@ public class CompositeImage extends ImagePlus {
 	public synchronized void updateImage() {
 		int imageSize = width*height;
 		int nChannels = getNChannels();
-		int redValue, greenValue, blueValue;
 		int ch = getChannel();
 		
 		//IJ.log("updateImage: "+ch+"/"+nChannels+" "+currentSlice+" "+currentFrame);

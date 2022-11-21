@@ -845,7 +845,7 @@ public class AVI_Reader extends VirtualStack implements PlugIn {
 			for (int i=0;i<nEntriesInUse;i++) {			//read all entries (each pointing to an ix00 index)
 				long qwOffset = readLong();
 				int dwSize = readInt();
-				int dwDuration = readInt();				//number of frames in ix00; ignored: not always trustworthy
+				readInt();				//number of frames in ix00; ignored: not always trustworthy
 				if (verbose)
 					IJ.log("   indx entry: '" +fourccString(dwChunkId)+"' incl header "+posSizeString(qwOffset,dwSize)+timeString());
 				long nextIndxEntryPointer = raFile.getFilePointer();
@@ -954,19 +954,7 @@ public class AVI_Reader extends VirtualStack implements PlugIn {
 		biYPelsPerMeter = readInt();
 		biClrUsed = readInt();
 		biClrImportant = readInt();
-		if (verbose) {
-			IJ.log("   biSize=" + biSize);
-			IJ.log("   biWidth=" + biWidth);
-			IJ.log("   biHeight=" + biHeight);
-			IJ.log("   biPlanes=" + biPlanes);
-			IJ.log("   biBitCount=" + biBitCount);
-			IJ.log("   biCompression=0x" + Integer.toHexString(biCompression)+" '"+fourccString(biCompression)+"'");
-			IJ.log("   biSizeImage=" + biSizeImage);
-			IJ.log("   biXPelsPerMeter=" + biXPelsPerMeter);
-			IJ.log("   biYPelsPerMeter=" + biYPelsPerMeter);
-			IJ.log("   biClrUsed=" + biClrUsed);
-			IJ.log("   biClrImportant=" + biClrImportant);
-		}
+		writeLogs();
 
 		int allowedBitCount = 0;
 		boolean readPalette = false;
@@ -1086,6 +1074,22 @@ public class AVI_Reader extends VirtualStack implements PlugIn {
 				raFile.readByte();
 			}
 			cm = new IndexColorModel(biBitCount, biClrUsed, pr, pg, pb);
+		}
+	}
+
+	private void writeLogs() {
+		if (verbose) {
+			IJ.log("   biSize=" + biSize);
+			IJ.log("   biWidth=" + biWidth);
+			IJ.log("   biHeight=" + biHeight);
+			IJ.log("   biPlanes=" + biPlanes);
+			IJ.log("   biBitCount=" + biBitCount);
+			IJ.log("   biCompression=0x" + Integer.toHexString(biCompression)+" '"+fourccString(biCompression)+"'");
+			IJ.log("   biSizeImage=" + biSizeImage);
+			IJ.log("   biXPelsPerMeter=" + biXPelsPerMeter);
+			IJ.log("   biYPelsPerMeter=" + biYPelsPerMeter);
+			IJ.log("   biClrUsed=" + biClrUsed);
+			IJ.log("   biClrImportant=" + biClrImportant);
 		}
 	}
 

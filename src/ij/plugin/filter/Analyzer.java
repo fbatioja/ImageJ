@@ -576,7 +576,7 @@ public class Analyzer implements PlugInFilter, Measurements {
 				double circularity = perimeter==0.0?0.0:4.0*Math.PI*(stats.area/(perimeter*perimeter));
 				if (circularity>1.0) circularity = 1.0;
 				rt.addValue(ResultsTable.CIRCULARITY, circularity);
-				Polygon ch = null;
+				
 				boolean isArea = roi==null || roi.isArea();
 				double convexArea = roi!=null?getArea(roi.getConvexHull()):stats.pixelCount;
 				rt.addValue(ResultsTable.ASPECT_RATIO, isArea?stats.major/stats.minor:0.0);
@@ -621,8 +621,7 @@ public class Analyzer implements PlugInFilter, Measurements {
 			rt.addValue(ResultsTable.MINOR,stats.minor);
 			rt.addValue(ResultsTable.ANGLE,stats.angle);
 		}
-		if ((measurements&FERET)!=0) {
-			boolean extras = true;
+		if ((measurements&FERET)!=0) {			
 			double FeretDiameter=Double.NaN, feretAngle=Double.NaN, minFeret=Double.NaN,
 				feretX=Double.NaN, feretY=Double.NaN;
 			Roi roi2 = roi;

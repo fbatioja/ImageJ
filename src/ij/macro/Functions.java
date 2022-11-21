@@ -1639,7 +1639,6 @@ public class Functions implements MacroConstants, Measurements {
 
 	String getInfo(String key) {
 			String lowercaseKey = key.toLowerCase(Locale.US);
-			int len = lowercaseKey.length();
 			if (lowercaseKey.equals("command.name")) {
 				return ImageJ.getCommandName();
 			} else if (lowercaseKey.equals("overlay")) {

@@ -206,7 +206,6 @@ public class ContrastEnhancer implements PlugIn, Measurements {
 	}
 	
 	void normalize(ImageProcessor ip, double min, double max) {
-		int min2 = 0;
 		int max2 = 255;
 		int range = 256;
 		if (ip instanceof ShortProcessor)
